@@ -3,7 +3,7 @@ import CartContext from "./cart-context";
 import axios from "axios";
 
 const CartProvider = (props) => {
-  const api = 'https://crudcrud.com/api/04e03612b4474a0d8401297de71a1ab0/cart';
+  const api = 'https://crudcrud.com/api/de39e97b05834454bf2313822f405d57/cart';
   const [items, updatedItems] = useState([]);
   const getItems = async () => {
     try {
@@ -46,8 +46,8 @@ const CartProvider = (props) => {
         };
 
         await axios.put(`${url}/${itemIdToUpdate}`, updatedItem);
-        console.log(url);
-        console.log(itemIdToUpdate);
+        // console.log(url);
+        // console.log(itemIdToUpdate);
       } catch (error) {
         console.error("Error updating item:", error);
       }

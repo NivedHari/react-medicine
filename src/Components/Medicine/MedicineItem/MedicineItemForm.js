@@ -11,18 +11,22 @@ const MedicineItemForm = (props) => {
 
     const enteredAmount = amountInputRef.current.value;
     const enteredAmountNumber = +enteredAmount;
-    console.log(enteredAmountNumber);
+    // console.log(enteredAmountNumber);
 
     if (
       enteredAmount.trim().length === 0 ||
       enteredAmountNumber < 1 ||
-      enteredAmountNumber > 20
+      enteredAmountNumber > 20 ||
+      enteredAmountNumber > props.quantity
     ) {
       setAmountIsValid(false);
       return;
     }
-
+    
     props.onAddToCart(enteredAmountNumber);
+    console.log(props.quantity);
+    
+    // props.onAddAmount(enteredAmountNumber);
   };
 
   return (
@@ -38,7 +42,7 @@ const MedicineItemForm = (props) => {
         defaultValue="1"
       />
       <button >Add To Cart</button>
-      {!amountIsValid && <p>Enter Valid Amount</p>}
+      {!amountIsValid && <p>Enter a valid amount (<strong>Available stock : {props.quantity}</strong> )</p>}
     </form>
   );
 };

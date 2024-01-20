@@ -22,8 +22,8 @@ const MedicineItem = (props) => {
       amount: amount,
       price: +props.price,
     });
-    props.onRemove();
-    // console.log(props.id, props.name, amount, props.price);
+    props.onRemove(amount);
+    console.log("Amount from medicine Item",amount);
   };
 
   return (
@@ -41,8 +41,9 @@ const MedicineItem = (props) => {
           <p>Out Of Stock</p>
         ) : (
         <MedicineItemForm
-          onClick={props.onRemove}
           onAddToCart={addToCartHandler}
+          onAddAmount={props.onRemove}
+          quantity={props.quantity}
         />)}
       </div>
     </li>

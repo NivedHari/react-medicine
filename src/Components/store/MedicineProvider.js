@@ -5,7 +5,7 @@ import MedicineContext from "./medcine-context";
 const MedicineProvider = (props) => {
   const [medicines, updatedMedicines] = useState([]);
 
-  const api = 'https://crudcrud.com/api/04e03612b4474a0d8401297de71a1ab0/medicine';
+  const api = 'https://crudcrud.com/api/de39e97b05834454bf2313822f405d57/medicine';
 
   const getMedicines = async () => {
     try {
@@ -30,6 +30,7 @@ const MedicineProvider = (props) => {
   }, [medicines]);
 
   const addMedicineHandler = async (item) => {
+    console.log("Hello")
     const updatedMedicinesArray = [...medicines];
     let url = `${api}`;
     const existingItemIndex = updatedMedicinesArray.findIndex(
@@ -48,8 +49,8 @@ const MedicineProvider = (props) => {
         };
 
         await axios.put(`${url}/${itemIdToUpdate}`, updatedItem);
-        console.log(url);
-        console.log(itemIdToUpdate);
+        // console.log(url);
+        // console.log(itemIdToUpdate);
       } catch (error) {
         console.error("Error updating item:", error);
       }
@@ -66,15 +67,15 @@ const MedicineProvider = (props) => {
     updatedMedicines(updatedMedicinesArray);
   };
 
-  const removeMedicineHandler = async (id) => {
+  const removeMedicineHandler = async (id,amount) => {
+    console.log("Amount from context ",amount);
     const itemIndex = medicines.findIndex((item) => item._id === id);
     const existingItem = medicines[itemIndex];
-    console.log(existingItem);
     if (itemIndex !== -1) {
       const updatedMedicinesArray = [...medicines];
 
       if (existingItem.quantity > 1) {
-        updatedMedicinesArray[itemIndex].quantity -= 1;
+        updatedMedicinesArray[itemIndex].quantity -= amount;
         const updatedItem = {
           name: existingItem.name,
           description: existingItem.description,
@@ -84,7 +85,7 @@ const MedicineProvider = (props) => {
         try {
           const url = `${api}`;
           await axios.put(`${url}/${id}`, updatedItem);
-          console.log(url);
+          // console.log(url);
 
           updatedMedicines(updatedMedicinesArray);
         } catch (error) {

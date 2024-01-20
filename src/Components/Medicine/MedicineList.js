@@ -4,8 +4,10 @@ import { useContext, useEffect } from "react";
 import MedicineContext from "../store/medcine-context";
 
 const MedicineList = (props) => {
-  const removeMedicineHandler = (id) => {
-    medCtx.removeItem(id);
+  const removeMedicineHandler = (id,amount) => {
+    medCtx.removeItem(id,amount);
+    console.log("Amount from medicineList",amount);
+
   }
   const medCtx = useContext(MedicineContext);
   return (
@@ -20,7 +22,7 @@ const MedicineList = (props) => {
             description={medicine.description}
             price={medicine.price}
             quantity={medicine.quantity}
-            onRemove={() => removeMedicineHandler(medicine._id)}
+            onRemove={(amount) => removeMedicineHandler(medicine._id,amount)}
           />
         ))}
       </ul>
